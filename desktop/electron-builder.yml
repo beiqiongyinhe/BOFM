@@ -1,0 +1,49 @@
+appId: com.openfic.app
+productName: OpenFic
+
+directories:
+  output: dist-electron
+
+publish:
+  provider: github
+  owner: syrizelink
+  repo: OpenFic
+  releaseType: release
+
+files:
+  - dist/**/*
+  - package.json
+
+extraResources:
+  - from: ../frontend/dist
+    to: frontend-dist
+    filter:
+      - "**/*"
+  - from: resources/app-update.yml
+    to: app-update.yml
+
+win:
+  artifactName: OpenFic-${version}-win-${arch}.${ext}
+  target:
+    - nsis
+    - zip
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  artifactName: OpenFic-${version}-win-${arch}-setup.${ext}
+
+mac:
+  artifactName: OpenFic-${version}-mac-${arch}.${ext}
+  target:
+    - dmg
+    - zip
+  category: public.app-category.productivity
+  identity: null
+
+linux:
+  artifactName: OpenFic-${version}-linux-${arch}.${ext}
+  target:
+    - AppImage
+    - tar.gz
+  category: Utility

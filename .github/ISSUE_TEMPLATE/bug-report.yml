@@ -1,0 +1,61 @@
+name: Bug 反馈
+description: 报告 OpenFicM Android 使用问题
+labels:
+  - bug
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      placeholder: |
+        在什么情况下出现了什么问题？
+        预期行为: ...
+        实际行为: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: OpenFicM 版本
+      placeholder: "如: 0.4.0"
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: 手机与 Android 版本
+      placeholder: "如: Redmi K90 Pro Max / Android 16"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志、截图或录屏
+      description: 请先移除 API Key、令牌、供应商请求内容和小说隐私数据。
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 提交前检查
+      options:
+        - label: 我已搜索现有 Issue，未发现重复问题
+          required: true
+        - label: 我确认提交内容不包含密钥、令牌或其他敏感信息
+          required: true

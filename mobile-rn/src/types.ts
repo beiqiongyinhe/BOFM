@@ -1,0 +1,259 @@
+import type { DocumentFormat } from "@/lib/text-extract";
+
+export type ProviderType = "openai-compatible" | "google-genai" | "anthropic";
+
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  coverImagePath: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Volume {
+  id: string;
+  projectId: string;
+  title: string;
+  orderIndex: number;
+}
+
+export interface Chapter {
+  id: string;
+  projectId: string;
+  volumeId: string;
+  title: string;
+  content: string;
+  orderIndex: number;
+  updatedAt: string;
+}
+
+/** 笔记的归属层级：两个外键都为空是整书，只有卷是卷级，有章是章级。 */
+export type NoteScope = "project" | "volume" | "chapter";
+
+export interface Note {
+  id: string;
+  projectId: string;
+  volumeId: string | null;
+  chapterId: string | null;
+  title: string;
+  content: string;
+  orderIndex: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type StyleSourceFormat = "txt" | "markdown" | "epub";
+
+export interface StyleSource {
+  id: string;
+  title: string;
+  fileName: string;
+  format: StyleSourceFormat;
+  fileUri: string;
+  sizeBytes: number;
+  contentHash: string;
+  characterCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type StyleProfileKind = "reference" | "author";
+
+export interface StyleProfile {
+  id: string;
+  seriesId: string;
+  projectId: string | null;
+  sourceId: string | null;
+  kind: StyleProfileKind;
+  name: string;
+  version: number;
+  guide: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type ChapterDraftStatus = "generated" | "revised" | "evolved";
+
+export interface ChapterDraftSnapshot {
+  id: string;
+  projectId: string;
+  chapterId: string;
+  styleProfileId: string | null;
+  aiDraft: string;
+  authorRevision: string | null;
+  status: ChapterDraftStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Provider {
+  id: string;
+  name: string;
+  type: ProviderType;
+  baseUrl: string;
+  apiKeyRef: string;
+  createdAt: string;
+}
+
+export interface Model {
+  id: string;
+  providerId: string;
+  name: string;
+  modelId: string;
+  temperature: number;
+  maxTokens: number;
+}
+
+export interface ChatSession {
+  id: string;
+  projectId: string;
+  title: string;
+  modelId: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type AgentRunStatus = "running" | "completed" | "error";
+export type AgentTraceEventStatus = "running" | "waiting" | "completed" | "error";
+export type AgentTraceEventKind = "agent" | "tool" | "skill" | "question" | "consistency";
+
+export interface AgentTraceEvent {
+  id: string;
+  kind: AgentTraceEventKind;
+  status: AgentTraceEventStatus;
+  title: string;
+  agentName: string;
+  toolName?: string;
+  detail?: string;
+  input?: string;
+  output?: string;
+  startedAt: string;
+  completedAt?: string;
+}
+
+export interface AgentRunTrace {
+  version: 1;
+  id: string;
+  status: AgentRunStatus;
+  primaryAgentId: string;
+  primaryAgentName: string;
+  collaborationRequired: boolean;
+  startedAt: string;
+  completedAt?: string;
+  events: AgentTraceEvent[];
+}
+
+export interface AgentClarificationOption {
+  label: string;
+  description?: string;
+}
+
+export interface AgentClarificationQuestion {
+  title: string;
+  description?: string;
+  options: AgentClarificationOption[];
+}
+
+export interface AgentClarificationAnswer {
+  question: string;
+  answer: string;
+}
+
+export interface AgentClarificationRequest {
+  id: string;
+  agentName: string;
+  questions: AgentClarificationQuestion[];
+}
+
+export interface AgentClarificationResponse {
+  answers: AgentClarificationAnswer[];
+  cancelled: boolean;
+}
+
+/** 助手附件：用户发送消息时随附的文件，正文已抽取为纯文本并落盘。 */
+export interface ChatAttachment {
+  id: string;
+  /** 用户选择的原始文件名，用于界面展示 */
+  name: string;
+  /** 抽取出的纯文本格式 */
+  format: DocumentFormat;
+  sizeBytes: number;
+  characterCount: number;
+  /** 抽取后的纯文本文件在应用文档目录中的 URI */
+  textUri: string;
+}
+
+export interface ChatMessageMetadata {
+  attachments?: ChatAttachment[];
+  agentTrace?: AgentRunTrace;
+  taskStatus?: "completed" | "failed";
+  errorMessage?: string;
+  errorDetail?: string;
+  retryContext?: {
+    userMessageId: string;
+    modelId: string;
+    agentId: string | null;
+  };
+}
+
+export interface ChatMessage {
+  id: string;
+  projectId: string;
+  sessionId: string;
+  role: "user" | "assistant" | "system";
+  content: string;
+  metadata: ChatMessageMetadata | null;
+  createdAt: string;
+}
+
+export interface Character {
+  id: string;
+  projectId: string;
+  name: string;
+  description: string;
+  imagePath: string | null;
+  isFavorited: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WorldInfo {
+  id: string;
+  projectId: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WorldInfoEntry {
+  id: string;
+  worldInfoId: string;
+  uid: number;
+  name: string;
+  order: number;
+  content: string;
+  tokenCount: number;
+  isEnabled: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type IndexSourceType = "chapter" | "character" | "world-entry";
+
+export interface LocalSearchResult {
+  id: string;
+  sourceType: IndexSourceType;
+  sourceId: string;
+  title: string;
+  content: string;
+  score: number;
+  rerankScore?: number;
+}
+
+export interface ModelSelection {
+  provider: Provider;
+  model: Model;
+  apiKey: string;
+}
