@@ -1,13 +1,13 @@
 <div align="center">
 
-# Better OpenFicM
+# BOFM
 
 **A local-first Android app for writing fiction on your phone**
 
-[![Release](https://img.shields.io/github/v/release/beiqiongyinhe/better-openficm?label=release&color=2e7d5b)](https://github.com/beiqiongyinhe/better-openficm/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/beiqiongyinhe/better-openficm/total?color=2e7d5b)](https://github.com/beiqiongyinhe/better-openficm/releases)
-[![Android](https://img.shields.io/badge/Android-9.0%2B-3ddc84?logo=android&logoColor=white)](https://github.com/beiqiongyinhe/better-openficm/releases/latest)
-[![ABI](https://img.shields.io/badge/ABI-arm64--v8a-blue)](https://github.com/beiqiongyinhe/better-openficm/releases/latest)
+[![Release](https://img.shields.io/github/v/release/beiqiongyinhe/BOFM?label=release&color=2e7d5b)](https://github.com/beiqiongyinhe/BOFM/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/beiqiongyinhe/BOFM/total?color=2e7d5b)](https://github.com/beiqiongyinhe/BOFM/releases)
+[![Android](https://img.shields.io/badge/Android-9.0%2B-3ddc84?logo=android&logoColor=white)](https://github.com/beiqiongyinhe/BOFM/releases/latest)
+[![ABI](https://img.shields.io/badge/ABI-arm64--v8a-blue)](https://github.com/beiqiongyinhe/BOFM/releases/latest)
 [![License](https://img.shields.io/badge/License-Apache--2.0-lightgrey)](LICENSE)
 
 [Download](#download) · [User guide](docs/USER_GUIDE_EN.md) · [Changelog](CHANGELOG_EN.md) · [Release notes](docs/releases) · [Build from source](#build-from-source) · [Contributing](CONTRIBUTING_EN.md)
@@ -18,13 +18,13 @@
 
 ---
 
-Better OpenFicM is an Android adaptation of [OpenFic](https://github.com/syrizelink/OpenFic) rebuilt with React Native, Expo SQLite, and an **on-device Agent runtime**. The installed APK needs no PC, FastAPI, Socket.IO, or Metro.
+BOFM is an Android adaptation of [OpenFic](https://github.com/syrizelink/OpenFic) rebuilt with React Native, Expo SQLite, and an **on-device Agent runtime**. The installed APK needs no PC, FastAPI, Socket.IO, or Metro.
 
 > This is an independently maintained derivative project, not an official OpenFic Android client. The app interface is in Simplified Chinese; key documents have English versions (see the language links above).
 
 ---
 
-## 🔧 This repository is a community-modified build (better-openficm)
+## 🔧 This repository is a community-modified build (BOFM)
 
 - Modified from upstream [tioners/OpenFicM](https://github.com/tioners/OpenFicM) at commit `c5619630`. **Not an official release.**
 - Copyright in the original design, code, and content belongs to upstream [OpenFicM](https://github.com/tioners/OpenFicM) and [OpenFic](https://github.com/syrizelink/OpenFic); this repository continues to be released under Apache-2.0 and keeps the upstream `LICENSE`, `NOTICE`, and `THIRD_PARTY_NOTICES.md`.
@@ -37,11 +37,11 @@ Better OpenFicM is an Android adaptation of [OpenFic](https://github.com/syrizel
 
 Most mobile AI writing tools are chat wrappers: they generate text, but you have to keep track of your own project material, characters, and world rules — and paste them back into the prompt yourself.
 
-Better OpenFicM ports the desktop Agent system to the phone. The agent reads your chapters, characters, and world entries, writes back to them under permissions you control, and can delegate to sub-agents. Your work stays on the device; the network is used only when you actually call a model.
+BOFM ports the desktop Agent system to the phone. The agent reads your chapters, characters, and world entries, writes back to them under permissions you control, and can delegate to sub-agents. Your work stays on the device; the network is used only when you actually call a model.
 
 ## Download
 
-Get the APK from [Releases](https://github.com/beiqiongyinhe/better-openficm/releases/latest) and install it directly. When upgrading, install over the old version — do not uninstall first.
+Get the APK from [Releases](https://github.com/beiqiongyinhe/BOFM/releases/latest) and install it directly. When upgrading, install over the old version — do not uninstall first.
 
 | Requirement | Android 9.0 or newer |
 | --- | --- |
@@ -49,7 +49,7 @@ Get the APK from [Releases](https://github.com/beiqiongyinhe/better-openficm/rel
 | APK size | ~127 MB |
 | Signing certificate SHA-256 | `ff68431a9d797589a0f6034848dc1c34ae4e3acba878d5183b5afe941f08a837` |
 
-> The fingerprint above is this modified build (better-openficm). The upstream official build is signed with `c5dd7c04…63`; the two differ, so they cannot be installed over each other.
+> The fingerprint above is this modified build (BOFM). The upstream official build is signed with `c5dd7c04…63`; the two differ, so they cannot be installed over each other.
 
 Download only from this project's Releases. A signature conflict usually means the installed package uses a different certificate; uninstalling clears local projects, so export first.
 
@@ -185,7 +185,7 @@ Output: `OpenFicM-Android-<version>.apk`
 
 | Path | Purpose |
 | --- | --- |
-| `mobile-rn` | The Better OpenFicM Android app |
+| `mobile-rn` | The BOFM Android app |
 | `docs` | User guide, release notes, project handover record (`*_EN.md` files are the English versions) |
 | English docs | `README_EN.md`, `CHANGELOG_EN.md`, `CONTRIBUTING_EN.md`, `docs/**/*_EN.md`, `mobile-rn/*_EN.md` |
 | `backend`, `frontend`, `desktop` | Retained OpenFic upstream sources and compatibility fixes, kept for provenance |

@@ -1,13 +1,13 @@
 <div align="center">
 
-# Better OpenFicM
+# BOFM
 
 **在手机上完成小说创作的本地优先 Android 应用**
 
-[![Release](https://img.shields.io/github/v/release/beiqiongyinhe/better-openficm?label=%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC&color=2e7d5b)](https://github.com/beiqiongyinhe/better-openficm/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/beiqiongyinhe/better-openficm/total?label=%E4%B8%8B%E8%BD%BD%E9%87%8F&color=2e7d5b)](https://github.com/beiqiongyinhe/better-openficm/releases)
-[![Android](https://img.shields.io/badge/Android-9.0%2B-3ddc84?logo=android&logoColor=white)](https://github.com/beiqiongyinhe/better-openficm/releases/latest)
-[![ABI](https://img.shields.io/badge/ABI-arm64--v8a-blue)](https://github.com/beiqiongyinhe/better-openficm/releases/latest)
+[![Release](https://img.shields.io/github/v/release/beiqiongyinhe/BOFM?label=%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC&color=2e7d5b)](https://github.com/beiqiongyinhe/BOFM/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/beiqiongyinhe/BOFM/total?label=%E4%B8%8B%E8%BD%BD%E9%87%8F&color=2e7d5b)](https://github.com/beiqiongyinhe/BOFM/releases)
+[![Android](https://img.shields.io/badge/Android-9.0%2B-3ddc84?logo=android&logoColor=white)](https://github.com/beiqiongyinhe/BOFM/releases/latest)
+[![ABI](https://img.shields.io/badge/ABI-arm64--v8a-blue)](https://github.com/beiqiongyinhe/BOFM/releases/latest)
 [![License](https://img.shields.io/badge/License-Apache--2.0-lightgrey)](LICENSE)
 
 [下载安装](#下载) · [使用说明](docs/USER_GUIDE.md) · [更新日志](CHANGELOG.md) · [版本发布说明](docs/releases) · [从源码构建](#从源码构建) · [贡献指南](CONTRIBUTING.md)
@@ -18,13 +18,13 @@
 
 ---
 
-Better OpenFicM 是基于 [OpenFic](https://github.com/syrizelink/OpenFic) 重构的 Android 小说创作应用，使用 React Native、Expo SQLite 和**运行在手机上的 Agent 运行时**。安装后不需要电脑、FastAPI、Socket.IO 或 Metro。
+BOFM 是基于 [OpenFic](https://github.com/syrizelink/OpenFic) 重构的 Android 小说创作应用，使用 React Native、Expo SQLite 和**运行在手机上的 Agent 运行时**。安装后不需要电脑、FastAPI、Socket.IO 或 Metro。
 
 > 本项目是独立维护的衍生项目，并非 OpenFic 官方 Android 客户端。
 
 ---
 
-## 🔧 本仓库是社区修改版（better-openficm）
+## 🔧 本仓库是社区修改版（BOFM）
 
 - 基于 [tioners/OpenFicM](https://github.com/tioners/OpenFicM) 上游提交 `c5619630` 二次修改，**非官方版本**。
 - 原始设计、代码与内容著作权归上游 [OpenFicM](https://github.com/tioners/OpenFicM) 及 [OpenFic](https://github.com/syrizelink/OpenFic) 所有；本仓库继续以 Apache-2.0 发布，并保留上游 `LICENSE`、`NOTICE`、`THIRD_PARTY_NOTICES.md`。
@@ -37,11 +37,11 @@ Better OpenFicM 是基于 [OpenFic](https://github.com/syrizelink/OpenFic) 重�
 
 手机上的 AI 写作工具大多是套壳聊天窗口：能生成文字，但作品资料、角色关系、世界设定都得你自己记着，再手动粘回提示词里。
 
-Better OpenFicM 把桌面端那套 Agent 体系整个搬到了手机上——智能体能读取你的章节、角色和世界书，能按权限直接写回去，还能委派子智能体分工。作品数据全部留在手机，只有真正调用模型时才联网。
+BOFM 把桌面端那套 Agent 体系整个搬到了手机上——智能体能读取你的章节、角色和世界书，能按权限直接写回去，还能委派子智能体分工。作品数据全部留在手机，只有真正调用模型时才联网。
 
 ## 下载
 
-前往 [Releases](https://github.com/beiqiongyinhe/better-openficm/releases/latest) 下载 APK，直接安装即可，升级时覆盖安装、不要卸载。
+前往 [Releases](https://github.com/beiqiongyinhe/BOFM/releases/latest) 下载 APK，直接安装即可，升级时覆盖安装、不要卸载。
 
 | 系统要求 | Android 9.0 及以上 |
 | --- | --- |
@@ -49,7 +49,7 @@ Better OpenFicM 把桌面端那套 Agent 体系整个搬到了手机上——智
 | 安装包体积 | 约 127 MB |
 | 签名证书 SHA-256 | `ff68431a9d797589a0f6034848dc1c34ae4e3acba878d5183b5afe941f08a837` |
 
-> 上表为本修改版（better-openficm）的签名指纹。上游官方版的指纹是 `c5dd7c04…63`，两者不同，无法互相覆盖安装。
+> 上表为本修改版（BOFM）的签名指纹。上游官方版的指纹是 `c5dd7c04…63`，两者不同，无法互相覆盖安装。
 
 只从本项目 Releases 下载。提示签名冲突通常说明装的不是同一证书的包；卸载会清除本地作品，处理前先导出。
 
@@ -185,7 +185,7 @@ APK 输出位置：`OpenFicM-Android-<version>.apk`
 
 | 路径 | 说明 |
 | --- | --- |
-| `mobile-rn` | Better OpenFicM Android 应用 |
+| `mobile-rn` | BOFM Android 应用 |
 | `docs` | 使用说明、版本说明、项目交接记录（`*_EN.md` 为对应的英文版） |
 | 英文文档 | `README_EN.md`、`CHANGELOG_EN.md`、`CONTRIBUTING_EN.md`、`docs/**/*_EN.md`、`mobile-rn/*_EN.md` |
 | `backend`、`frontend`、`desktop` | 保留的 OpenFic 上游源码与兼容修复，便于追踪来源 |
