@@ -1,6 +1,12 @@
 # Changelog
 
 [简体中文](CHANGELOG.md)
+## 0.8.1 - 2026-10-05
+- Renamed the app's public identity from `OpenFicM` to `BOFM` (launcher name `app_name`, `expo.name`, and the `package.json` name)
+- Synced versions to `0.8.1`: `versionName` 0.8.0→0.8.1, `versionCode` 15→16 (`10`→16 in `app.json`)
+- This repository is a community-modified build of [tioners/OpenFicM](https://github.com/tioners/OpenFicM) (unofficial), released under Apache-2.0 with the upstream license files retained
+- Upstream-facing repository and resource URLs are left unchanged so in-app update checks and remote resource fetching keep working
+- See the [README](README_EN.md#changes-in-this-modified-build) for the full list of changes relative to upstream
 
 > Translation note: this is an English translation of this fork's CHANGELOG.md. The 0.7.0 section was already in English in the original; the remaining sections were Chinese and have been translated.
 

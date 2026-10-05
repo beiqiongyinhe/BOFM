@@ -212,6 +212,21 @@ Project code is released under the [Apache License 2.0](LICENSE). Third-party co
 
 Baseline: upstream [tioners/OpenFicM](https://github.com/tioners/OpenFicM) commit `c5619630`.
 This repository adds the following enhancements on top of it (`git diff upstream/main`, 30 files, +1952 / −249, including 5 new files).
+### App identity: rename and version bump
+This repository changes the app's public identity from `OpenFicM` to `BOFM` and syncs the version numbers, matching the release artifact `BOFM-0.8.1.apk` (versionCode `16` / versionName `0.8.1`).
+
+| File | Field | Upstream | BOFM |
+| --- | --- | --- | --- |
+| `mobile-rn/app.json` | `expo.name` | `OpenFicM` | `BOFM` |
+| `mobile-rn/app.json` | `expo.version` | `0.8.0` | `0.8.1` |
+| `mobile-rn/app.json` | `expo.android.versionCode` | `10` | `16` |
+| `mobile-rn/package.json` | `name` | `openficm` | `bofm` |
+| `mobile-rn/package.json` | `version` | `0.8.0` | `0.8.1` |
+| `mobile-rn/android/app/build.gradle` | `versionCode` | `15` | `16` |
+| `mobile-rn/android/app/build.gradle` | `versionName` | `0.8.0` | `0.8.1` |
+| `mobile-rn/android/app/src/main/res/values/strings.xml` | `app_name` | `OpenFicM` | `BOFM` |
+
+> Note: upstream-facing repository and resource URLs in the source (for example the `tioners/OpenFicM` repository used for update checks, and `OPENFICM_CATALOG_URL`) are **left untouched**. They are upstream semantics; changing them would break in-app update checks and remote resource fetching.
 
 ### New: import works from local files on the phone
 

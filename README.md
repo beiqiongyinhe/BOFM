@@ -213,6 +213,22 @@ APK 输出位置：`OpenFicM-Android-<version>.apk`
 基线：上游 [tioners/OpenFicM](https://github.com/tioners/OpenFicM) 提交 `c5619630`。
 本仓库在其之上做了以下增强（`git diff upstream/main`，30 个文件，+1952 / −249，其中新增 5 个文件）。
 
+### 应用标识：改名与版本号
+本仓库把应用对外标识从 `OpenFicM` 改为 `BOFM`，并同步版本号，对应成品 `BOFM-0.8.1.apk`（versionCode `16` / versionName `0.8.1`）。
+
+| 文件 | 字段 | 上游 | BOFM |
+| --- | --- | --- | --- |
+| `mobile-rn/app.json` | `expo.name` | `OpenFicM` | `BOFM` |
+| `mobile-rn/app.json` | `expo.version` | `0.8.0` | `0.8.1` |
+| `mobile-rn/app.json` | `expo.android.versionCode` | `10` | `16` |
+| `mobile-rn/package.json` | `name` | `openficm` | `bofm` |
+| `mobile-rn/package.json` | `version` | `0.8.0` | `0.8.1` |
+| `mobile-rn/android/app/build.gradle` | `versionCode` | `15` | `16` |
+| `mobile-rn/android/app/build.gradle` | `versionName` | `0.8.0` | `0.8.1` |
+| `mobile-rn/android/app/src/main/res/values/strings.xml` | `app_name` | `OpenFicM` | `BOFM` |
+
+> 说明：源码中指向上游的仓库地址与资源地址（如更新检查使用的 `tioners/OpenFicM`、`OPENFICM_CATALOG_URL`）**保持原样**，它们属于上游语义，改动会破坏应用内更新检查与远程资源拉取。
+
 ### 新增：从手机本地导入作品
 
 上游的作品页只能手动新建空白作品、再一章章粘贴正文。本版把「导入」做成了正经功能：在作品页顶部点「**新建或导入作品**」，直接选手机里的文件即可。

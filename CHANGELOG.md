@@ -1,4 +1,10 @@
 # Changelog
+## 0.8.1 - 2026-10-05
+- 应用对外标识由 `OpenFicM` 改名为 `BOFM`（桌面名称 `app_name`、`expo.name`、`package.json` 名称）
+- 同步版本号到 `0.8.1`：`versionName` 0.8.0→0.8.1，`versionCode` 15→16（`app.json` 中的 `10`→16）
+- 本仓库为 [tioners/OpenFicM](https://github.com/tioners/OpenFicM) 的社区修改版（非官方），以 Apache-2.0 发布并保留上游许可文件
+- 源码中指向上游的仓库地址与资源地址保持不变，以免破坏应用内更新检查与远程资源拉取
+- 相对上游的完整改动清单见 [README](README.md#本修改版相对上游的改动)
 
 ## 0.7.0 - 2026-08-20
 
