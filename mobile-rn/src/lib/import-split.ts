@@ -5,7 +5,7 @@ import { normalizeText, type DocumentFormat, type DocumentSection } from "./text
  *
  * 算法要点来自真实网文的实测结论：
  * 1. 逐行扫描而不是全文正则 exec 循环：章节标题行极少带句读，逐行判定误报低、边界可控；
- * 2. 标题分四族：第X卷、第X章/节/回、序章/番外等裸标题、英文 chapter N；
+ * 2. 标题分五族：第X卷、第X章/节/回、序章/番外等裸标题、数字~标题（1~章节名）、英文 chapter N；
  * 3. 站点常把“裸标题行 + 空行 + 缩进短标题”拆成两行，需要按间距合并成一条；
  * 4. 卷名常缺失，用“第X卷 后面的 token”投票补齐（只出现一次的 token 视为噪声）；
  * 5. 任何识别失败都回落到“整本一章”，保证导入不丢字。
@@ -21,12 +21,19 @@ const SPECIAL_HEADINGS =
 const VOLUME_PREFIX_PATTERN = new RegExp(`^第([${NUMERALS}]+)卷`);
 /** 标题里重复出现的“第X卷 ”前缀。 */
 const VOLUME_PREFIX_STRIP_PATTERN = new RegExp(`^第[${NUMERALS}]+卷\s+`);
-/** “第X章 / 第X节 / 第X回”，标题后不能再跟数字（“第1章1”这类是页码）。 */
-const CHAPTER_HEADING_PATTERN = new RegExp(`^第[${NUMERALS}]+[章节回](?:[^\d]|$)`);
+/** “第X章 / 第X回”，标题后不能再跟数字（“第1章1”这类是页码）。 */
+const CHAPTER_HEADING_PATTERN = new RegExp(`^第[${NUMERALS}]+[章回](?:[^\d]|$)`);
+/**
+ * “第X节”：与“第一节课”这类正文常用词撞字面，节后必须跟空白 / 波浪号 / 行尾，
+ * 避免把“第一节课就当着学员的面……”整句误判成标题。
+ */
+const SECTION_HEADING_PATTERN = new RegExp(`^第[${NUMERALS}]+节(?:[ \t]|[~～：:]|$)`);
 /** 独立的特殊章节名，例如“序章”“番外 3”。 */
 const SPECIAL_HEADING_PATTERN = new RegExp(`^(?:${SPECIAL_HEADINGS})(?:\s|$|[~～])`);
 /** 西文章节标题。 */
 const ENGLISH_HEADING_PATTERN = /^(?:chapter|chap\.?)\s*\d+/i;
+/** “123~章节名”这类纯数字号标题（网文常见写法），数字限 1~4 位防长数字串误报。 */
+const NUMERIC_TILDE_HEADING_PATTERN = /^\d{1,4}[~～]/;
 /** 含句读或引号的整行是正文句子，即使以“第X章”开头也不能当标题。 */
 const REJECT_HEADING_PATTERN = /[。\u201c\u201d\u300c\u300d]/;
 /** 站点生成的“作者：xx 字数：NNNN”元数据行。 */
@@ -65,14 +72,16 @@ interface HeadingMarker {
   volume: string | null;
 }
 
-/** 是否为标题行：四族任一命中，且不含句读、长度受限。 */
+/** 是否为标题行：五族任一命中，且不含句读、长度受限。 */
 function isHeadingLine(value: string): boolean {
   if (!value || value.length > MAX_HEADING_LINE_LENGTH) return false;
   if (REJECT_HEADING_PATTERN.test(value)) return false;
   return VOLUME_PREFIX_PATTERN.test(value)
     || CHAPTER_HEADING_PATTERN.test(value)
+    || SECTION_HEADING_PATTERN.test(value)
     || SPECIAL_HEADING_PATTERN.test(value)
-    || ENGLISH_HEADING_PATTERN.test(value);
+    || ENGLISH_HEADING_PATTERN.test(value)
+    || NUMERIC_TILDE_HEADING_PATTERN.test(value);
 }
 
 /** 前言只有一行且很短时视为扉页／书名行噪声。 */
